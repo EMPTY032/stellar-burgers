@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import { fetchOrderByNumber } from '../../services/orderSlice';
 
 export const OrderInfo: FC = () => {
-  const number = useParams<{ number: string }>();
+  const { number } = useParams<{ number: string }>();
   const orderNumber = Number(number);
   const dispatch = useDispatch();
 
@@ -20,7 +20,7 @@ export const OrderInfo: FC = () => {
 
   useEffect(() => {
     dispatch(fetchOrderByNumber(orderNumber));
-  }, [dispatch]);
+  }, [dispatch, orderNumber]);
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {

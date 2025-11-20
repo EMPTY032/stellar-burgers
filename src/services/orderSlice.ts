@@ -2,6 +2,8 @@ import { getOrderByNumberApi, orderBurgerApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { Action } from '@remix-run/router';
 import { TOrder } from '@utils-types';
+import { useDispatch } from './store';
+import { clearIngridient } from './constructorSlice';
 
 type OrderState = {
   // создание нового заказа в конструкторе -_-
@@ -23,34 +25,43 @@ const initialState: OrderState = {
 export const createOrder = createAsyncThunk<
   TOrder,
   string[],
-  { rejectValue: any }
->('order/createOrder', async (ingredients: string[], { rejectWithValue }) => {
-  try {
-    const newOrder = await orderBurgerApi(ingredients);
-    if (!newOrder?.success) {
-      return rejectWithValue(newOrder);
+  { rejectValue: string }
+>(
+  'order/createOrder',
+  async (ingredients: string[], { rejectWithValue, dispatch }) => {
+    try {
+      const newOrder = await orderBurgerApi(ingredients);
+      if (!newOrder?.success) {
+        return rejectWithValue('Order not found');
+      }
+      dispatch(clearIngridient());
+
+      return newOrder.order;
+    } catch (err) {
+      return rejectWithValue(
+        err instanceof Error ? err.message : 'Unknown error'
+      );
     }
-    return newOrder.order;
-  } catch (err) {
-    return rejectWithValue(err);
   }
-});
+);
 
 export const fetchOrderByNumber = createAsyncThunk<
   TOrder,
   number,
-  { rejectValue: any }
+  { rejectValue: string }
 >('order/fetchOrderByNumber', async (id: number, { rejectWithValue }) => {
   try {
     const data = await getOrderByNumberApi(id);
 
     if (!data?.success || !data.orders.length) {
-      return rejectWithValue(data);
+      return rejectWithValue('Order not found');
     }
 
     return data.orders[0];
   } catch (err) {
-    return rejectWithValue(err);
+    return rejectWithValue(
+      err instanceof Error ? err.message : 'Unknown error'
+    );
   }
 });
 

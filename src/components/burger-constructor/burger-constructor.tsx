@@ -29,6 +29,7 @@ export const BurgerConstructor: FC = () => {
       ])
     );
   };
+
   const closeOrderModal = () => {
     dispatch(clearNewOrder());
   };

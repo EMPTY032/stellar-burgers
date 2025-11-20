@@ -24,26 +24,30 @@ const initialState: feedState = {
 export const fetchFeeds = createAsyncThunk<
   TOrdersData,
   void,
-  { rejectValue: any }
+  { rejectValue: string }
 >('feed/fetchFeed', async (_, thunkApi) => {
   try {
     const data = await getFeedsApi();
     return data;
   } catch (err) {
-    return thunkApi.rejectWithValue(err);
+    return thunkApi.rejectWithValue(
+      err instanceof Error ? err.message : 'Unknown error'
+    );
   }
 });
 
 export const fetchOrdersCurentUser = createAsyncThunk<
   TOrder[],
   void,
-  { rejectValue: any }
+  { rejectValue: string }
 >('feed/fetchOrdersCurentUser', async (_, { rejectWithValue }) => {
   try {
     const data = await getOrdersApi();
     return data;
   } catch (err) {
-    return rejectWithValue(err);
+    return rejectWithValue(
+      err instanceof Error ? err.message : 'Unknown error'
+    );
   }
 });
 

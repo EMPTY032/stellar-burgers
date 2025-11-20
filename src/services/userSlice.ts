@@ -41,53 +41,59 @@ export const chekUserAuth = () => (dispatch: AppDispatch) => {
 export const loginUser = createAsyncThunk<
   TUser,
   TLoginData,
-  { rejectValue: any }
+  { rejectValue: string }
 >('user/loginUser', async ({ email, password }, { rejectWithValue }) => {
   try {
     const data = await loginUserApi({ email, password });
     if (!data?.success) {
-      return rejectWithValue(data);
+      return rejectWithValue('Order not found');
     }
     setCookie('accessToken', data.accessToken);
     localStorage.setItem('refreshToken', data.refreshToken);
     return data.user;
   } catch (err) {
-    return rejectWithValue(err);
+    return rejectWithValue(
+      err instanceof Error ? err.message : 'Unknown error'
+    );
   }
 });
 
 export const registerUser = createAsyncThunk<
   TUser,
   TRegisterData,
-  { rejectValue: any }
+  { rejectValue: string }
 >(
   'user/registerUser',
   async ({ email, password, name }: TRegisterData, { rejectWithValue }) => {
     try {
       const data = await registerUserApi({ email, password, name });
       if (!data?.success) {
-        return rejectWithValue(data);
+        return rejectWithValue('Order not found');
       }
       setCookie('accessToken', data.accessToken);
       localStorage.setItem('refreshToken', data.refreshToken);
       return data.user;
     } catch (err) {
-      return rejectWithValue(err);
+      return rejectWithValue(
+        err instanceof Error ? err.message : 'Unknown error'
+      );
     }
   }
 );
 
-export const getUser = createAsyncThunk<TUser, void, { rejectValue: any }>(
+export const getUser = createAsyncThunk<TUser, void, { rejectValue: string }>(
   'user/getUser',
   async (_, { rejectWithValue }) => {
     try {
       const data = await getUserApi();
       if (!data?.success) {
-        return rejectWithValue(data);
+        return rejectWithValue('Order not found');
       }
       return data.user;
     } catch (err) {
-      return rejectWithValue(err);
+      return rejectWithValue(
+        err instanceof Error ? err.message : 'Unknown error'
+      );
     }
   }
 );
@@ -95,16 +101,18 @@ export const getUser = createAsyncThunk<TUser, void, { rejectValue: any }>(
 export const updateUser = createAsyncThunk<
   TUser,
   TRegisterData,
-  { rejectValue: any }
+  { rejectValue: string }
 >('user/updateUser', async (user, { rejectWithValue }) => {
   try {
     const data = await updateUserApi(user);
     if (!data?.success) {
-      return rejectWithValue(data);
+      return rejectWithValue('Order not found');
     }
     return data.user;
   } catch (err) {
-    return rejectWithValue(err);
+    return rejectWithValue(
+      err instanceof Error ? err.message : 'Unknown error'
+    );
   }
 });
 
@@ -128,7 +136,6 @@ const userSlice = createSlice({
     },
     userLogout(state) {
       state.data = null;
-      state.isAuthCheked = false;
     }
   },
   extraReducers: (builder) => {
@@ -143,7 +150,7 @@ const userSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loginUserRequest = false;
-        state.error = action.payload;
+        state.error = action.payload ?? null;
       })
       .addCase(registerUser.pending, (state) => {
         state.loginUserRequest = true;
@@ -155,13 +162,13 @@ const userSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loginUserRequest = false;
-        state.error = action.payload;
+        state.error = action.payload ?? null;
       })
       .addCase(getUser.fulfilled, (state, action) => {
         state.data = action.payload;
       })
       .addCase(getUser.rejected, (state, action) => {
-        state.error = action.payload;
+        state.error = action.payload ?? null;
         state.data = null;
       })
       .addCase(updateUser.pending, (state) => {
@@ -174,7 +181,7 @@ const userSlice = createSlice({
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.loginUserRequest = false;
-        state.error = action.payload;
+        state.error = action.payload ?? null;
       });
   }
 });

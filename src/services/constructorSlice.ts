@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid';
 
 type TConstructorIngridient = TIngredient & { id: string };
 
-type TConstructorType = {
+export type TConstructorType = {
   bun: TConstructorIngridient | null;
   ingredients: TConstructorIngridient[];
 };
@@ -19,15 +19,15 @@ const constructorSlice = createSlice({
   initialState,
   reducers: {
     addIngredient(state, action) {
-      const newIngridients: TConstructorIngridient = {
+      const newIngredients: TConstructorIngridient = {
         ...action.payload,
         id: uuid()
       };
 
-      if (newIngridients.type === 'bun') {
-        state.bun = newIngridients;
+      if (newIngredients.type === 'bun') {
+        state.bun = newIngredients;
       } else {
-        state.ingredients.push(newIngridients);
+        state.ingredients.push(newIngredients);
       }
     },
     removeIngridient(state, action) {
@@ -42,10 +42,18 @@ const constructorSlice = createSlice({
 
       state.ingredients.splice(from, 1);
       state.ingredients.splice(to, 0, item);
+    },
+    clearIngridient(state) {
+      state.bun = null;
+      state.ingredients = [];
     }
   }
 });
 
-export const { addIngredient, removeIngridient, moveIngridient } =
-  constructorSlice.actions;
+export const {
+  addIngredient,
+  removeIngridient,
+  moveIngridient,
+  clearIngridient
+} = constructorSlice.actions;
 export default constructorSlice.reducer;
