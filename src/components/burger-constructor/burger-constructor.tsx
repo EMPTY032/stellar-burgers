@@ -3,6 +3,7 @@ import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { useDispatch, useSelector } from '../../services/store';
 import { clearNewOrder, createOrder } from '../../services/orderSlice';
+import { useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
@@ -16,8 +17,10 @@ export const BurgerConstructor: FC = () => {
 
   const userAuth = useSelector((state) => state.user.data);
 
+  const navigate = useNavigate();
+
   const onOrderClick = () => {
-    if (!userAuth) return;
+    if (!userAuth) navigate('/login');
 
     if (!constructorItems.bun || orderRequest) return;
 

@@ -3,7 +3,11 @@
   width: 640px;
 }
 .number {
-  text-align: center;
+  text-align: left;
+  padding: 0px;
+  font-family: 'Iceland';
+  font-style: normal;
+  font-size: 28px;
 }
 
 .status {
