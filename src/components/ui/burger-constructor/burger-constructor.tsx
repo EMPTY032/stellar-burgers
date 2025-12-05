@@ -20,7 +20,11 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
 }) => (
   <section className={styles.burger_constructor}>
     {constructorItems.bun ? (
-      <div className={`${styles.element} mb-4 mr-4`}>
+      <div
+        className={`${styles.element} mb-4 mr-4`}
+        data-cy='ingredient-constructor'
+        data-name-bun={constructorItems.bun.name}
+      >
         <ConstructorElement
           type='top'
           isLocked
