@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TIngredient } from '@utils-types';
 import { RootState } from './store';
 
-type TingridientsState = {
+export type TingridientsState = {
   ingridients: TIngredient[];
   isloading: boolean;
   error: null | string;
