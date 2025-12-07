@@ -37,6 +37,12 @@ describe('тест редусера', () => {
       order: OrderReducer(undefined, { type: '@@INIT' })
     });
   });
+
+  it('должен вернуть начальное состояние при неизвестном экшене', () => {
+    const initial = rootReducer(undefined, { type: 'UNKNOWN_ACTION' });
+
+    expect(initial).toEqual(rootReducer(undefined, { type: '@@INIT' }));
+  });
 });
 
 describe('Проверяют редьюсер слайса burgerConstructor', () => {
