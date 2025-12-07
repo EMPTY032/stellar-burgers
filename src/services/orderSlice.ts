@@ -1,8 +1,6 @@
 import { getOrderByNumberApi, orderBurgerApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Action } from '@remix-run/router';
 import { TOrder } from '@utils-types';
-import { useDispatch } from './store';
 import { clearIngridient } from './constructorSlice';
 
 type OrderState = {

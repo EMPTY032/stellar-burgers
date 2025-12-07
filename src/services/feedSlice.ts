@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { Action } from '@remix-run/router';
 import { TOrder, TOrdersData } from '@utils-types';
 
-interface feedState extends TOrdersData {
+export interface feedState extends TOrdersData {
   orders: TOrder[];
   total: number;
   totalToday: number;

@@ -1,0 +1,77 @@
+{
+  "success": true,
+  "name": "Флюоресцентный люминесцентный бургер",
+  "order": {
+    "ingredients": [
+      {
+        "_id": "643d69a5c3f7b9001cfa093d",
+        "name": "Флюоресцентная булка R2-D3",
+        "type": "bun",
+        "proteins": 44,
+        "fat": 26,
+        "carbohydrates": 85,
+        "calories": 643,
+        "price": 988,
+        "image": "https://code.s3.yandex.net/react/code/bun-01.png",
+        "image_mobile": "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
+        "image_large": "https://code.s3.yandex.net/react/code/bun-01-large.png",
+        "__v": 0
+      },
+      {
+        "_id": "643d69a5c3f7b9001cfa093e",
+        "name": "Филе Люминесцентного тетраодонтимформа",
+        "type": "main",
+        "proteins": 44,
+        "fat": 26,
+        "carbohydrates": 85,
+        "calories": 643,
+        "price": 988,
+        "image": "https://code.s3.yandex.net/react/code/meat-03.png",
+        "image_mobile": "https://code.s3.yandex.net/react/code/meat-03-mobile.png",
+        "image_large": "https://code.s3.yandex.net/react/code/meat-03-large.png",
+        "__v": 0
+      },
+      {
+        "_id": "643d69a5c3f7b9001cfa093e",
+        "name": "Филе Люминесцентного тетраодонтимформа",
+        "type": "main",
+        "proteins": 44,
+        "fat": 26,
+        "carbohydrates": 85,
+        "calories": 643,
+        "price": 988,
+        "image": "https://code.s3.yandex.net/react/code/meat-03.png",
+        "image_mobile": "https://code.s3.yandex.net/react/code/meat-03-mobile.png",
+        "image_large": "https://code.s3.yandex.net/react/code/meat-03-large.png",
+        "__v": 0
+      },
+      {
+        "_id": "643d69a5c3f7b9001cfa093d",
+        "name": "Флюоресцентная булка R2-D3",
+        "type": "bun",
+        "proteins": 44,
+        "fat": 26,
+        "carbohydrates": 85,
+        "calories": 643,
+        "price": 988,
+        "image": "https://code.s3.yandex.net/react/code/bun-01.png",
+        "image_mobile": "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
+        "image_large": "https://code.s3.yandex.net/react/code/bun-01-large.png",
+        "__v": 0
+      }
+    ],
+    "_id": "69359a7ea64177001b32292b",
+    "owner": {
+      "name": "Вернись ОКС",
+      "email": "komiksmr99@gmail.com",
+      "createdAt": "2025-11-15T17:36:20.604Z",
+      "updatedAt": "2025-12-06T16:05:53.390Z"
+    },
+    "status": "done",
+    "name": "Флюоресцентный люминесцентный бургер",
+    "createdAt": "2025-12-07T15:17:18.484Z",
+    "updatedAt": "2025-12-07T15:17:18.675Z",
+    "number": 96634,
+    "price": 3952
+  }
+}
